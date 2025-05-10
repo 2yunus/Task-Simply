@@ -1,0 +1,6 @@
+@TaskSimply.Server_HostAddress = http://localhost:5239
+
+GET {{TaskSimply.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
