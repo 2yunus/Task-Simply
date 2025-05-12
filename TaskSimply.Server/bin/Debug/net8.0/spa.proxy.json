@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:49960",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\yunus\\source\\repos\\TaskSimply\\TaskSimply.Server\\..\\tasksimply.client",
+"WorkingDirectory": "C:\\Users\\yunus\\Downloads\\Task-Simply-main\\Task-Simply-main - Copy\\TaskSimply.Server\\..\\tasksimply.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

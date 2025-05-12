@@ -1,1 +1,3 @@
 C:\Users\yunus\source\repos\TaskSimply\tasksimply.client\obj\Debug\tasksimply.client.esproj.CoreCompileInputs.cache
+C:\Users\yunus\Downloads\Task-Simply-main\Task-Simply-main\tasksimply.client\obj\Debug\tasksimply.client.esproj.CoreCompileInputs.cache
+C:\Users\yunus\Downloads\Task-Simply-main\Task-Simply-main - Copy\tasksimply.client\obj\Debug\tasksimply.client.esproj.CoreCompileInputs.cache

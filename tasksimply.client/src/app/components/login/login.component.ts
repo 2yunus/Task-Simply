@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,13 +24,10 @@ import { Router, RouterLink } from '@angular/router';
             <div class="card-body p-4">
               <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-floating mb-4">
-                  <input type="email" class="form-control" id="email" formControlName="email" placeholder="name@example.com">
-                  <label for="email">Email address</label>
-                  <div class="text-danger mt-1" *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
-                    Email is required
-                  </div>
-                  <div class="text-danger mt-1" *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
-                    Please enter a valid email address
+                  <input type="text" class="form-control" id="username" formControlName="username" placeholder="Username">
+                  <label for="username">Username</label>
+                  <div class="text-danger mt-1" *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">
+                    Username is required
                   </div>
                 </div>
 
@@ -39,6 +37,10 @@ import { Router, RouterLink } from '@angular/router';
                   <div class="text-danger mt-1" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
                     Password is required
                   </div>
+                </div>
+
+                <div class="alert alert-danger" *ngIf="errorMessage">
+                  {{ errorMessage }}
                 </div>
 
                 <div class="d-grid gap-2">
@@ -108,13 +110,15 @@ import { Router, RouterLink } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   isLoading = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', Validators.required]
     });
   }
@@ -122,11 +126,32 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      // Simulate loading
-      setTimeout(() => {
-        this.router.navigate(['/tasks']);
-        this.isLoading = false;
-      }, 1000);
+      this.errorMessage = '';
+
+      const loginData = {
+        username: this.loginForm.get('username')?.value,
+        password: this.loginForm.get('password')?.value
+      };
+
+      this.authService.login(loginData).subscribe({
+        next: (response) => {
+          if (response.success) {
+            this.router.navigate(['/tasks']);
+          } else {
+            this.errorMessage = response.message || 'Login failed. Please try again.';
+            this.isLoading = false;
+          }
+        },
+        error: (error) => {
+          this.errorMessage = error.message || 'An error occurred during login. Please try again.';
+          this.isLoading = false;
+        },
+        complete: () => {
+          if (this.isLoading) {
+            this.isLoading = false;
+          }
+        }
+      });
     }
   }
 } 

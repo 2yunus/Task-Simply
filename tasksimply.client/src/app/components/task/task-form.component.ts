@@ -16,12 +16,12 @@ import { Task } from '../../services/task.service';
         <div class="modal-content">
           <div class="modal-header bg-primary text-white">
             <h5 class="modal-title">{{ isEditing ? 'Edit Task' : 'Add New Task' }}</h5>
-            <button type="button" class="btn-close btn-close-white" (click)="onCancel()"></button>
+            <button type="button" class="btn-close btn-close-white" (click)="onCancel()" [disabled]="isLoading"></button>
           </div>
           <div class="modal-body p-4">
             <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="title" formControlName="title" placeholder="Task Title">
+                <input type="text" class="form-control" id="title" formControlName="title" placeholder="Task Title" [disabled]="isLoading">
                 <label for="title">Task Title</label>
                 <div class="text-danger" *ngIf="taskForm.get('title')?.hasError('required') && taskForm.get('title')?.touched">
                   Title is required
@@ -29,7 +29,7 @@ import { Task } from '../../services/task.service';
               </div>
 
               <div class="form-floating mb-3">
-                <textarea class="form-control" id="description" formControlName="description" placeholder="Task Description" style="height: 100px"></textarea>
+                <textarea class="form-control" id="description" formControlName="description" placeholder="Task Description" style="height: 100px" [disabled]="isLoading"></textarea>
                 <label for="description">Description</label>
                 <div class="text-danger" *ngIf="taskForm.get('description')?.hasError('required') && taskForm.get('description')?.touched">
                   Description is required
@@ -37,7 +37,7 @@ import { Task } from '../../services/task.service';
               </div>
 
               <div class="form-floating mb-3">
-                <select class="form-select" id="status" formControlName="status">
+                <select class="form-select" id="status" formControlName="status" [disabled]="isLoading">
                   <option value="pending">Pending</option>
                   <option value="in-progress">In Progress</option>
                   <option value="completed">Completed</option>
@@ -46,7 +46,7 @@ import { Task } from '../../services/task.service';
               </div>
 
               <div class="form-floating mb-3">
-                <input type="date" class="form-control" id="dueDate" formControlName="dueDate">
+                <input type="date" class="form-control" id="dueDate" formControlName="dueDate" [disabled]="isLoading">
                 <label for="dueDate">Due Date</label>
                 <div class="text-danger" *ngIf="taskForm.get('dueDate')?.hasError('required') && taskForm.get('dueDate')?.touched">
                   Due date is required
@@ -54,7 +54,8 @@ import { Task } from '../../services/task.service';
               </div>
 
               <div class="d-grid gap-2">
-                <button class="btn btn-primary btn-lg" type="submit" [disabled]="!taskForm.valid">
+                <button class="btn btn-primary btn-lg" type="submit" [disabled]="!taskForm.valid || isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                   {{ isEditing ? 'Update Task' : 'Add Task' }}
                 </button>
               </div>
@@ -104,7 +105,8 @@ import { Task } from '../../services/task.service';
   `]
 })
 export class TaskFormComponent {
-  @Input() task: Task | null = null;
+  @Input({ required: false }) task: Task | null = null;
+  @Input({ required: false }) isLoading: boolean = false;
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<any>();
 

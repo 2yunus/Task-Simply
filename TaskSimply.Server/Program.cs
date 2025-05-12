@@ -63,13 +63,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Apply CORS before auth
 app.UseCors("AllowAngularDevServer");
 
 if (!app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
 }
+
+// Serve Angular static files from wwwroot with no-cache headers
+app.UseDefaultFiles(); // Serves index.html by default
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+        ctx.Context.Response.Headers["Pragma"] = "no-cache";
+        ctx.Context.Response.Headers["Expires"] = "0";
+    }
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -78,6 +89,9 @@ app.UseAuthorization();
 app.MapGet("/", () => "TaskSimply API is running. Use /swagger for API documentation.");
 
 app.MapControllers();
+
+// Fallback to index.html for Angular routing
+app.MapFallbackToFile("index.html");
 
 // Initialize the database
 using (var scope = app.Services.CreateScope())

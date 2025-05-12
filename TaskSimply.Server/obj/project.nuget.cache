@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NSDyzBIV/s0=",
+  "dgSpecHash": "nQZP7xr7dQc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\yunus\\source\\repos\\TaskSimply\\TaskSimply.Server\\TaskSimply.Server.csproj",
+  "projectFilePath": "C:\\Users\\yunus\\Downloads\\Task-Simply-main\\Task-Simply-main - Copy\\TaskSimply.Server\\TaskSimply.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yunus\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\yunus\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

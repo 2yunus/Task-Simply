@@ -4268,11 +4268,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yunus\\source\\repos\\TaskSimply\\TaskSimply.Server\\TaskSimply.Server.csproj",
+      "projectUniqueName": "C:\\Users\\yunus\\Downloads\\Task-Simply-main\\Task-Simply-main - Copy\\TaskSimply.Server\\TaskSimply.Server.csproj",
       "projectName": "TaskSimply.Server",
-      "projectPath": "C:\\Users\\yunus\\source\\repos\\TaskSimply\\TaskSimply.Server\\TaskSimply.Server.csproj",
+      "projectPath": "C:\\Users\\yunus\\Downloads\\Task-Simply-main\\Task-Simply-main - Copy\\TaskSimply.Server\\TaskSimply.Server.csproj",
       "packagesPath": "C:\\Users\\yunus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yunus\\source\\repos\\TaskSimply\\TaskSimply.Server\\obj\\",
+      "outputPath": "C:\\Users\\yunus\\Downloads\\Task-Simply-main\\Task-Simply-main - Copy\\TaskSimply.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
